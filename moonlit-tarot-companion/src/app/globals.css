@@ -1,0 +1,432 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+
+  --color-bg: #171020;
+  --color-bg-soft: #21172d;
+  --color-surface: #2a1d37;
+  --color-surface-raised: #342343;
+  --color-surface-muted: #24192f;
+  --color-text: #f6efff;
+  --color-text-soft: #ded0ef;
+  --color-text-muted: #a99ab8;
+  --color-text-faint: #81718f;
+  --color-text-inverse: #21172d;
+  --color-border: #49365c;
+  --color-border-soft: #3a2a4a;
+  --color-focus: #c9a7ff;
+  --color-accent: #a985ff;
+  --color-accent-hover: #b99cff;
+  --color-accent-pressed: #8f6ee6;
+  --color-accent-soft: #3b2a55;
+  --color-accent-glow: #d8c2ff;
+  --color-warm: #f3c98b;
+  --color-warm-soft: #4a352e;
+  --color-rose: #e8a9bd;
+  --color-lavender: #d9c7ff;
+  --color-success: #8fd6b3;
+  --color-success-bg: #1f3b33;
+  --color-warning: #f3c98b;
+  --color-warning-bg: #463524;
+  --color-danger: #ff9aa8;
+  --color-danger-bg: #4a2430;
+  --shadow-soft: 0 18px 50px rgba(8, 5, 14, 0.34);
+  --shadow-raised: 0 24px 70px rgba(8, 5, 14, 0.44);
+  --shadow-focus: 0 0 0 3px rgba(201, 167, 255, 0.24);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+  --container-mobile: 100%;
+  --container-tablet: 720px;
+  --container-desktop: 960px;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #fbf7ff;
+  --color-bg-soft: #f4edf9;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-muted: #f1e9f7;
+  --color-text: #24172f;
+  --color-text-soft: #3b2a4a;
+  --color-text-muted: #6d5d7a;
+  --color-text-faint: #9586a2;
+  --color-text-inverse: #fbf7ff;
+  --color-border: #dacbe8;
+  --color-border-soft: #eadff2;
+  --color-focus: #815ee0;
+  --color-accent: #7652d6;
+  --color-accent-hover: #6846c4;
+  --color-accent-pressed: #5838ad;
+  --color-accent-soft: #eee6ff;
+  --color-accent-glow: #b99cff;
+  --color-warm: #b8792f;
+  --color-warm-soft: #fff0da;
+  --color-rose: #b85f7a;
+  --color-lavender: #7652d6;
+  --color-success: #2f8f67;
+  --color-success-bg: #e3f6ed;
+  --color-warning: #b8792f;
+  --color-warning-bg: #fff0da;
+  --color-danger: #c94d64;
+  --color-danger-bg: #ffe8ee;
+  --shadow-soft: 0 16px 40px rgba(58, 42, 74, 0.12);
+  --shadow-raised: 0 22px 56px rgba(58, 42, 74, 0.16);
+  --shadow-focus: 0 0 0 3px rgba(129, 94, 224, 0.2);
+}
+
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --font-sans: var(--font-thai);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--color-bg);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background:
+    radial-gradient(circle at 22% 8%, color-mix(in srgb, var(--color-accent-soft) 68%, transparent), transparent 28rem),
+    radial-gradient(circle at 82% 14%, color-mix(in srgb, var(--color-warm-soft) 44%, transparent), transparent 22rem),
+    var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-thai), var(--font-sc), system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    opacity: 0.42;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.76;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.motion-enter {
+  animation: fadeInUp 420ms ease-out both;
+}
+
+.motion-pulse {
+  animation: softPulse 1600ms ease-in-out infinite;
+}
+
+.card {
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
+    var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.field {
+  width: 100%;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+  font-family: var(--font-thai), var(--font-sc), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.85;
+  padding: var(--space-4);
+  transition:
+    border-color 180ms ease-out,
+    background-color 180ms ease-out,
+    box-shadow 180ms ease-out;
+}
+
+.field::placeholder {
+  color: var(--color-text-faint);
+}
+
+.field:hover:not(:disabled) {
+  border-color: var(--color-border);
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: var(--shadow-focus);
+  background: var(--color-surface);
+}
+
+.field-error {
+  border-color: var(--color-danger);
+  background: var(--color-danger-bg);
+}
+
+.tarot-flip-shell {
+  perspective: 1200px;
+}
+
+.tarot-flip-card {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  width: min(52vw, 180px);
+  transform-style: preserve-3d;
+  transition: transform 680ms cubic-bezier(0.2, 0.72, 0.2, 1);
+}
+
+.tarot-flip-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.tarot-card-side {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.tarot-card-front {
+  transform: rotateY(180deg);
+}
+
+.tarot-card-face {
+  position: relative;
+  display: grid;
+  aspect-ratio: 2 / 3;
+  width: 100%;
+  place-items: center;
+  overflow: hidden;
+  border: 2px solid var(--color-accent-glow);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 50% 48%, var(--color-accent-soft), transparent 22%),
+    radial-gradient(circle at 50% 50%, var(--color-surface-raised), var(--color-bg) 64%),
+    var(--color-surface-muted);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--color-accent) 20%, transparent),
+    0 20px 58px rgba(8, 5, 14, 0.44);
+}
+
+.tarot-card-face::before,
+.tarot-card-face::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid color-mix(in srgb, var(--color-accent-glow) 62%, transparent);
+  border-radius: calc(var(--radius-xl) - 8px);
+  pointer-events: none;
+}
+
+.tarot-card-face::after {
+  inset: 34px;
+  border-color: color-mix(in srgb, var(--color-warm) 42%, transparent);
+  border-radius: var(--radius-lg);
+  transform: rotate(45deg);
+}
+
+.tarot-card-sigil {
+  position: absolute;
+  inset: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--color-lavender) 72%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--color-accent-glow);
+}
+
+.tarot-card-rays {
+  position: absolute;
+  inset: 28px;
+  background:
+    linear-gradient(90deg, transparent 48%, color-mix(in srgb, var(--color-accent) 46%, transparent) 49%, transparent 51%),
+    linear-gradient(0deg, transparent 48%, color-mix(in srgb, var(--color-accent) 46%, transparent) 49%, transparent 51%),
+    linear-gradient(45deg, transparent 49%, color-mix(in srgb, var(--color-lavender) 42%, transparent) 50%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, color-mix(in srgb, var(--color-lavender) 42%, transparent) 50%, transparent 51%);
+  opacity: 0.72;
+}
+
+.tarot-card-back-mark {
+  position: absolute;
+  inset: 32px;
+  border: 1px solid color-mix(in srgb, var(--color-accent-glow) 58%, transparent);
+  transform: rotate(45deg);
+}
+
+.tarot-card-back-mark::before,
+.tarot-card-back-mark::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid color-mix(in srgb, var(--color-warm) 48%, transparent);
+  border-radius: var(--radius-pill);
+}
+
+.tarot-card-back-mark::after {
+  inset: 34px;
+  border-color: color-mix(in srgb, var(--color-lavender) 56%, transparent);
+}
+
+.ten-wands-scene {
+  position: absolute;
+  inset: 22px 28px 46px;
+  display: grid;
+  place-items: center;
+}
+
+.wand {
+  position: absolute;
+  bottom: 0;
+  width: 7px;
+  height: 72%;
+  border-radius: var(--radius-pill);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--color-warm) 68%, #ffffff 12%), var(--color-warm)),
+    var(--color-warm);
+  box-shadow:
+    0 0 12px color-mix(in srgb, var(--color-warm) 42%, transparent),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  transform-origin: bottom center;
+}
+
+.wand::before,
+.wand::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-glow);
+  transform: translateX(-50%);
+  opacity: 0.82;
+}
+
+.wand::before {
+  top: 18%;
+}
+
+.wand::after {
+  top: 56%;
+}
+
+.wand-1 { transform: translateX(-48px) rotate(-23deg); height: 76%; }
+.wand-2 { transform: translateX(-38px) rotate(-18deg); height: 83%; }
+.wand-3 { transform: translateX(-28px) rotate(-13deg); height: 78%; }
+.wand-4 { transform: translateX(-18px) rotate(-8deg); height: 86%; }
+.wand-5 { transform: translateX(-8px) rotate(-3deg); height: 80%; }
+.wand-6 { transform: translateX(4px) rotate(3deg); height: 87%; }
+.wand-7 { transform: translateX(16px) rotate(8deg); height: 82%; }
+.wand-8 { transform: translateX(28px) rotate(13deg); height: 88%; }
+.wand-9 { transform: translateX(40px) rotate(18deg); height: 79%; }
+.wand-10 { transform: translateX(50px) rotate(23deg); height: 84%; }
+
+.tarot-card-ground {
+  position: absolute;
+  right: 24px;
+  bottom: 28px;
+  left: 24px;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-accent-glow) 72%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--color-accent) 42%, transparent);
+}
+
+.tarot-card-moon {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  box-shadow: -8px 0 0 0 var(--color-accent-glow);
+  opacity: 0.9;
+}
+
+.tarot-card-title-ribbon {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  left: 18px;
+  z-index: 2;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-bg) 72%, transparent);
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.card-reading-copy {
+  animation: cardReveal 360ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
