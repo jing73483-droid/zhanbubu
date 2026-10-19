@@ -31,6 +31,7 @@ export default function Home() {
         </Button>
       </header>
 
+      <p className="mx-auto max-w-[760px] px-5 pt-4 text-sm text-[var(--color-text-soft)]" role="note">{locale === "zh" ? "交互演示 · 使用本地模板生成示例解读，未连接 AI 服务。输入保存在当前浏览器，请勿填写敏感信息。" : "เดโม · ใช้ข้อความตัวอย่าง ไม่ได้เชื่อมต่อ AI ข้อมูลบันทึกในเบราว์เซอร์นี้ กรุณาอย่ากรอกข้อมูลอ่อนไหว"}</p>
       <HeroEntry locale={locale} />
     </main>
   );

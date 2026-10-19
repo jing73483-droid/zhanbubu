@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Moonlit Tarot Companion 应用
 
-## Getting Started
+Next.js 15 + React 19 + TypeScript + Tailwind CSS 的中泰双语情绪陪伴交互原型。完整背景、文档导航、功能状态与部署方式见 [根目录 README](../README.md)。
 
-First, run the development server:
+## 启动
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+本地地址 http://localhost:3000。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 静态导出
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+产物在 `out/`；GitHub Pages 子路径构建使用 `GITHUB_PAGES=true npm run build`。
 
-To learn more about Next.js, take a look at the following resources:
+## 当前实现
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+情绪选择、抽牌、问题输入、三段式示例解读和浏览器草稿保存。示例解读由 `src/lib/mock-reading.ts` 提供，不调用真实 AI。结果页通过 `sessionId` 查询参数读取本地浏览器记录。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 配置边界
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+不需要模型密钥或数据库凭据。不应将 API Key 放入前端或 NEXT_PUBLIC 环境变量。真实模型、数据库、付费及埋点需要后续实现。

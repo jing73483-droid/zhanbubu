@@ -9,22 +9,15 @@ import { copy } from "@/lib/i18n";
 import { getLocalReadingSession } from "@/lib/mock-reading";
 import type { ReadingSession } from "@/types/reading";
 
-type ResultPageProps = {
-  params: Promise<{ sessionId: string }>;
-};
-
-export default function ResultPage({ params }: ResultPageProps) {
-  const [sessionId, setSessionId] = useState<string | null>(null);
+export default function ResultPage() {
   const [session, setSession] = useState<ReadingSession | null>(null);
 
   useEffect(() => {
-    params.then(({ sessionId: id }) => setSessionId(id));
-  }, [params]);
-
-  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get("sessionId");
     if (!sessionId) return;
     setSession(getLocalReadingSession(sessionId));
-  }, [sessionId]);
+  }, []);
 
   const locale = session?.locale ?? "zh";
   const text = copy[locale];

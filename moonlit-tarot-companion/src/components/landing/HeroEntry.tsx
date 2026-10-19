@@ -66,7 +66,7 @@ export function HeroEntry({ locale }: HeroEntryProps) {
       locale,
       selectedCard: selectedCard ?? tenOfWandsCard,
     });
-    router.push(`/result/${session.id}`);
+    router.push(`/result?sessionId=${encodeURIComponent(session.id)}`);
   }
 
   return (

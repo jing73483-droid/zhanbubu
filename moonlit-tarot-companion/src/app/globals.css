@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 :root {
+  --font-thai: "Noto Sans Thai", Tahoma, sans-serif;
+  --font-sc: "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-display: Georgia, serif;
   color-scheme: dark;
 
   --color-bg: #171020;
